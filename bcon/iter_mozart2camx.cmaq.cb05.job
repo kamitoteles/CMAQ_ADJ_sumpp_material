@@ -1,0 +1,60 @@
+#!/bin/csh -f
+
+setenv PROMPTFLAG N
+
+setenv IOAPI_ISPH 20
+
+set EXECUTION_ID = 201802
+set PATH = /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018
+mkdir -p /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/IC_BC
+
+set DATE_in = 20180901
+set DATE_end = 20180930
+
+# DEFINE INPUT MOZART FILES AND MET FILES
+set NINFILE = 1
+setenv INFILE1    /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/IC_BC/ncf_ICBC/OUTFILE3D.WACCM.20180931_20181001
+
+setenv INFILEMET3D  /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/mcip/2018_NSthAm/METCRO3D_201809.nc 
+setenv INFILEMET2D  /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/mcip/2018_NSthAm/METCRO2D_201809.nc
+
+#DEFINE OUTPUT FILENAMES
+setenv OUTFILEBC  /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/IC_BC/bc.36km.cmaq.cb05.$DATE_in.lst.ncf
+setenv OUTFILEIC  /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/IC_BC/ic.36km.cmaq.cb05.$DATE_in.lst.hr0.ncf
+
+rm $OUTFILEBC $OUTFILEIC
+
+../src/mozart2camx_CB05_AE5__NCEP << IEOF 
+CAMx5,CAMx6,CMAQ   |CMAQ
+ProcessDateYYYYMMDD|$DATE_in
+Output BC file?    |.true.
+Output IC file?    |.true.
+If IC, starting hr |0
+Output TC file?    |.false.
+Max num MZRT files |$NINFILE
+IEOF
+
+@ DATE_in = $DATE_in + 1
+
+while ( $DATE_in <= $DATE_end )
+set EXECUTION_ID = 201802
+#DEFINE OUTPUT FILENAMES
+setenv OUTFILEBC  /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018/IC_BC/bc.36km.cmaq.cb05.$DATE_in.lst.ncf
+
+rm $OUTFILEBC
+
+../src/mozart2camx_CB05_AE5__NCEP << IEOF 
+CAMx5,CAMx6,CMAQ   |CMAQ
+ProcessDateYYYYMMDD|$DATE_in
+Output BC file?    |.true.
+Output IC file?    |.false.
+If IC, starting hr |0
+Output TC file?    |.false.
+Max num MZRT files |$NINFILE
+IEOF
+
+@ DATE_in = $DATE_in + 1
+ 
+end
+
+
