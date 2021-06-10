@@ -19,4 +19,4 @@ This is the repository for the supplementary material used in the work Applicati
 
 ## Author
 
-All the tools listed in this repository were developed by Camilo Andrés Moreno. Contact: cama9709@gmail.com
+All the tools listed in this repository were developed or edited by Camilo Andrés Moreno. Contact: cama9709@gmail.com
