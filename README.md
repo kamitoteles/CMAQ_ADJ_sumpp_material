@@ -9,8 +9,8 @@ This is the repository for the supplementary material used in the work Applicati
 This is the [CMAQ Adjoint Installation Guide](https://github.com/kamitoteles/CMAQ_ADJ_Installation). In the repositoy is a comlplete guide on how to install the main model used in the investigation.
 
 ## Process flow chart
-
-<!--TODO: poner el flowchart -->
+This is the flow chart describing the process the user may follow to implement eh CMA Adjoint preprocessors and model.
+<img src="proceso.png" align="center">
 
 ## Tools
 

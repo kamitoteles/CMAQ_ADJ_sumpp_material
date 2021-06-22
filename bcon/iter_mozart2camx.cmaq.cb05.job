@@ -6,7 +6,7 @@
 
 setenv PROMPTFLAG N
 
-setenv IOAPI_ISPH 20
+setenv IOAPI_ISPH 20f
 
 set EXECUTION_ID = 201802
 set PATH = /hpcfs/home/ca.moreno12/CMAQ_v5.3.1/cmaq_adj/data/Sep_2018
